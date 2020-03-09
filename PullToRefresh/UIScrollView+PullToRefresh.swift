@@ -52,11 +52,7 @@ public extension UIScrollView {
         view.frame = defaultFrame(forPullToRefresh: pullToRefresh)
         
         addSubview(view)
-        #if swift(>=4.2)
         sendSubviewToBack(view)
-        #else
-        sendSubview(toBack: view)
-        #endif
     }
     
     func refresher(at position: Position) -> PullToRefresh? {
@@ -161,8 +157,8 @@ internal extension UIScrollView {
         case .bottom:
             originY = contentSize.height
         }
-        let height = view.frame.height + (pullToRefresh.topPadding ?? 0)
-        return CGRect(x: 0, y: originY, width: frame.width, height: height)
+        
+        return CGRect(x: 0, y: originY, width: frame.width, height: view.frame.height)
     }
 
 }
